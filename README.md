@@ -1,0 +1,186 @@
+## Reto n° 1
+### Nombre: Brayan Santiago Rincón Rodríguez
+### Curso: Programación orientada a objetos
+
+### 1. Crear una función que realice operaciones básicas (suma, resta, multiplicación, división) entre dos números, según la elección del usuario, la forma de entrada de la función será los dos operandos y el caracter usado para la operación. entrada: (1,2,"+"), salida (3)
+
+ ``` python 
+ 
+operacion = input("Ingrese el signo de la operación deseada(+,-,*,/): ")
+a = int(input("Ingrese el primer número: "))
+b = int(input("Ingrese el segundo número: "))
+
+
+def resultado (operacion, a,b):
+    if operacion == "+":
+        return (a+b)
+    
+    elif operacion == "-":
+        return (a-b)
+
+    elif operacion == "*":
+        return (a*b)
+    
+    elif operacion == "/":
+        while b == 0:
+            print("No se puede dividir por 0 ingrese un nuevo valor para el denominador")
+            b = int(input("Ingrese el segundo número: "))
+        return (a/b)
+
+if __name__ == "__main__":
+    print(resultado (operacion, a,b))
+
+# Para llegar a la solución plantié una función que recibiera como entradas
+# el signo de la operación y los dos números ingresados por el usuario. Luego,
+# mediante estructuras condicionales se evalúa cuál operación debe realizarse,
+# retornando el resultado correspondiente.En el caso de la división se evalua
+# que el denominador sea distinto de cero para evitar errores, de lo contrario 
+# si el número b es 0, se entrará en un bucle while hasta que b sea distinto de 0.
+
+ ```
+
+### 2. Realice una función que permita validar si una palabra es un palíndromo. Condición: No se vale hacer slicing para invertir la palabra y verificar que sea igual a la original.
+
+``` python
+def verificar_palindromo():
+    palabra = input("Ingrese su palabra: ")
+    contador = (len(palabra)-1)
+    guardar = []
+    palindromo: bool = True
+
+    for indice in palabra:
+        guardar.append(indice)
+
+    for i in range(len(guardar)):
+        if guardar[i] != guardar[contador]:
+            palindromo = False
+            break
+        contador = contador - 1
+
+    if palindromo == True:
+        print("La palabra "+ str(palabra)+ " es palíndromo")
+
+    else:
+        print("La palabra "+ str(palabra)+ " no es palíndromo")
+
+
+if __name__ == "__main__":
+    verificar_palindromo()
+
+
+# Para la solución al problema 2, se creó una función en donde primero se separan las letras de la palabra ingresada.
+# Posteriormente, se evalúa si la primera letra es diferente a la última letra de la palabra, de ser así, la variable 
+# booleana quedará como falsa. De lo contario se le resta uno al contador para que ahora se evalue la segunda letra junto
+# con la penúltima y así sucesivamente.
+
+```
+
+### 3. Escribir una función que reciba una lista de números y devuelva solo aquellos que son primos. La función debe recibir una lista de enteros y retornar solo aquellos que sean primos.
+
+``` python
+
+def primos():
+    cantidad = int(input("Cuántos números desea evaluar: "))
+    lista = []
+    contador: int = 2
+
+    for i in range(cantidad):
+        x = int(input("Ingrese el numero " + str(i+1) + " de su lista: "))
+        lista.append(x)
+
+    lista_primos = []
+
+    for numero in lista:
+        es_primo = True
+        
+        for contador in range(2, numero):
+            if numero % contador == 0:
+                es_primo = False
+                break
+
+        if numero > 1 and es_primo:
+            lista_primos.append(numero)
+
+    return lista_primos
+
+
+if __name__ == "__main__":
+    print(primos())
+
+
+# Para este problema se creó una función en donde el usuario puede poner la cantidad de números que desee en la lista.
+# Mediante un for se recorre cada número de la lista y se inicializa una bandera con valor True. Posteriormente, se evalua si el módulo
+# (residuo) es igual a 0, respecto a 2, y así sucesivamente hasta que el contador se actualice progresivamente al número - 1
+# Si el módulo es 0 en algún momento, el número no será primo por lo que la bandera se actualizará. Finalmente, los números primos
+# se guardarán en una nueva lista.
+
+```
+
+### 4. Escribir una función que reciba una lista de números enteros y retorne la mayor suma entre dos elementos consecutivos.
+
+``` python
+
+def suma():
+    cantidad = int(input("Cuántos números desea evaluar: "))
+    lista = []
+    lista_sumas = []
+
+    for i in range(cantidad):
+        x = int(input("Ingrese el numero " + str(i+1) + " de su lista: "))
+        lista.append(x)
+
+    for i in range(len(lista)-1):
+        adicion = lista[i] + lista[i+1]
+        lista_sumas.append(adicion)
+
+    print("La mayor suma de dos números de la lista " + str(lista) + " es: " + str(max(lista_sumas)))
+
+
+if __name__ == "__main__":
+    suma()
+
+# Se hizo un programa con una función donde el usuario ingreso la cantidad de números a ser evaluados en una lista.
+# Para luego, mediante un ciclo for, sumar el primer elemento de la lista con el siguiente elemento, guardando el resultado 
+# en otra lista. Se le aclaró al programa que el último elemento señalado será el penúltimo para no caer en un error.
+# Para finalizar, mediante la función max(), se identificó cuál era la suma mayor.
+
+```
+### 5. Escribir una función que reciba una lista de string y retorne unicamente aquellos elementos que tengan los mismos caracteres. e.g. entrada: ["amor", "roma", "perro"], salida ["amor", "roma"]
+
+``` python
+
+def mismos_caracteres():
+    palabras = int(input("Ingrese la cantidad de palabras que va a ingresar: "))
+    lista = []
+    guardar = []
+
+    for i in range(palabras):
+        palabra = input("Ingrese su palabra numero " + str(i+1) + ": ")
+        lista.append(palabra)
+
+    resultado = []
+
+    for i in range(len(lista)):
+        for j in range(i + 1, len(lista)):
+            if sorted(lista[i]) == sorted(lista[j]):
+
+                if lista[i] not in resultado:
+                    resultado.append(lista[i])
+
+                if lista[j] not in resultado:
+                    resultado.append(lista[j])
+
+    return resultado
+
+if __name__ == "__main__":
+    print(mismos_caracteres())
+
+
+# Para este problema se creó una función en la cual el usuario ingresa la cantidad de palabras a evaluar.
+# Posteriormente, mediante ciclos for, se comparan las palabras de la lista verificando si poseen los mismos
+# caracteres, independientemente del orden. Cuando dos palabras coinciden, se guardan en una nueva lista evitando
+# repetir elementos. Finalmente, la función retorna únicamente las palabras que cumplen dicha condición.
+
+```
+### Nombre: Brayan Santiago Rincón Rodríguez
+### Curso: Programación orientada a objetos
