@@ -1,27 +1,27 @@
 
-operacion = input("Ingrese el signo de la operación deseada(+,-,*,/): ")
-a = int(input("Ingrese el primer número: "))
-b = int(input("Ingrese el segundo número: "))
+def result(operation: str, first_number: int, second_number: int) -> float:
+    if operation == "+":
+        return first_number + second_number
 
+    elif operation == "-":
+        return first_number - second_number
 
-def resultado (operacion, a,b):
-    if operacion == "+":
-        return (a+b)
-    
-    elif operacion == "-":
-        return (a-b)
+    elif operation == "*":
+        return first_number * second_number
 
-    elif operacion == "*":
-        return (a*b)
-    
-    elif operacion == "/":
-        while b == 0:
+    elif operation == "/":
+        while second_number == 0:
             print("No se puede dividir por 0 ingrese un nuevo valor para el denominador")
-            b = int(input("Ingrese el segundo número: "))
-        return (a/b)
+            second_number = int(input("Ingrese el segundo número: "))
+        return first_number / second_number
+
 
 if __name__ == "__main__":
-    print(resultado (operacion, a,b))
+    operation = input("Ingrese el signo de la operación deseada(+,-,*,/): ")
+    first_number = int(input("Ingrese el primer número: "))
+    second_number = int(input("Ingrese el segundo número: "))
+    print(result(operation, first_number, second_number))
+
 
 # Para llegar a la solución plantié una función que recibiera como entradas
 # el signo de la operación y los dos números ingresados por el usuario. Luego,

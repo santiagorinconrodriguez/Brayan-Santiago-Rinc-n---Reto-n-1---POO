@@ -1,22 +1,23 @@
-def suma():
-    cantidad = int(input("Cuántos números desea evaluar: "))
-    lista = []
-    lista_sumas = []
+def addition(numbers: list[int]) -> int:
+    sum_list = []
 
-    for i in range(cantidad):
-        x = int(input("Ingrese el numero " + str(i+1) + " de su lista: "))
-        lista.append(x)
+    for index in range(len(numbers) - 1):
+        addition = numbers[index] + numbers[index + 1]
+        sum_list.append(addition)
 
-    for i in range(len(lista)-1):
-        adicion = lista[i] + lista[i+1]
-        lista_sumas.append(adicion)
-
-    print("La mayor suma de dos números de la lista " + str(lista) +
-          " es: " + str(max(lista_sumas)))
+    return max(sum_list)
 
 
 if __name__ == "__main__":
-    suma()
+    quantity = int(input("Cuántos números desea evaluar: "))
+    numbers = []
+
+    for i in range(quantity):
+        value = int(input("Ingrese el numero " + str(i + 1) + " de su lista: "))
+        numbers.append(value)
+
+    print("La mayor suma de dos números de la lista " + str(numbers) + " es: " + str(addition(numbers)))
+
 
 # Se hizo un programa con una función donde el usuario ingreso la cantidad de números a ser evaluados en una lista.
 # Para luego, mediante un ciclo for, sumar el primer elemento de la lista con el siguiente elemento, guardando el resultado 

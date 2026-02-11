@@ -6,29 +6,29 @@
 
  ``` python 
  
-operacion = input("Ingrese el signo de la operación deseada(+,-,*,/): ")
-a = int(input("Ingrese el primer número: "))
-b = int(input("Ingrese el segundo número: "))
+def result(operation: str, first_number: int, second_number: int) -> float:
+    if operation == "+":
+        return first_number + second_number
 
+    elif operation == "-":
+        return first_number - second_number
 
-def resultado (operacion, a,b):
-    if operacion == "+":
-        return (a+b)
-    
-    elif operacion == "-":
-        return (a-b)
+    elif operation == "*":
+        return first_number * second_number
 
-    elif operacion == "*":
-        return (a*b)
-    
-    elif operacion == "/":
-        while b == 0:
+    elif operation == "/":
+        while second_number == 0:
             print("No se puede dividir por 0 ingrese un nuevo valor para el denominador")
-            b = int(input("Ingrese el segundo número: "))
-        return (a/b)
+            second_number = int(input("Ingrese el segundo número: "))
+        return first_number / second_number
+
 
 if __name__ == "__main__":
-    print(resultado (operacion, a,b))
+    operation = input("Ingrese el signo de la operación deseada(+,-,*,/): ")
+    first_number = int(input("Ingrese el primer número: "))
+    second_number = int(input("Ingrese el segundo número: "))
+    print(result(operation, first_number, second_number))
+
 
 # Para llegar a la solución plantié una función que recibiera como entradas
 # el signo de la operación y los dos números ingresados por el usuario. Luego,
@@ -42,34 +42,35 @@ if __name__ == "__main__":
 ### 2. Realice una función que permita validar si una palabra es un palíndromo. Condición: No se vale hacer slicing para invertir la palabra y verificar que sea igual a la original.
 
 ``` python
-def verificar_palindromo():
-    palabra = input("Ingrese su palabra: ")
-    contador = (len(palabra)-1)
-    guardar = []
-    palindromo: bool = True
 
-    for indice in palabra:
-        guardar.append(indice)
+def check_palindrome(word: str) -> bool:
+    counter = len(word) - 1
+    letters = []
+    palindrome: bool = True
 
-    for i in range(len(guardar)):
-        if guardar[i] != guardar[contador]:
-            palindromo = False
+    for index in word:
+        letters.append(index)
+
+    for i in range(len(letters)):
+        if letters[i] != letters[counter]:
+            palindrome = False
             break
-        contador = contador - 1
+        counter = counter - 1
 
-    if palindromo == True:
-        print("La palabra "+ str(palabra)+ " es palíndromo")
-
-    else:
-        print("La palabra "+ str(palabra)+ " no es palíndromo")
+    return palindrome
 
 
 if __name__ == "__main__":
-    verificar_palindromo()
+    word = input("Ingrese su palabra: ")
+
+    if check_palindrome(word):
+        print("La palabra " + str(word) + " es palíndromo")
+    else:
+        print("La palabra " + str(word) + " no es palíndromo")
 
 
 # Para la solución al problema 2, se creó una función en donde primero se separan las letras de la palabra ingresada.
-# Posteriormente, se evalúa si la primera letra es diferente a la última letra de la palabra, de ser así, la variable 
+# Posteriormente, se evalúa si la primera letra es diferente a la última letra de la palabra, de ser así, la variable
 # booleana quedará como falsa. De lo contario se le resta uno al contador para que ahora se evalue la segunda letra junto
 # con la penúltima y así sucesivamente.
 
@@ -79,33 +80,32 @@ if __name__ == "__main__":
 
 ``` python
 
-def primos():
-    cantidad = int(input("Cuántos números desea evaluar: "))
-    lista = []
-    contador: int = 2
+def prime_numbers(numbers: list[int]) -> list[int]:
+    prime_list = []
 
-    for i in range(cantidad):
-        x = int(input("Ingrese el numero " + str(i+1) + " de su lista: "))
-        lista.append(x)
+    for number in numbers:
+        prime = True
 
-    lista_primos = []
-
-    for numero in lista:
-        es_primo = True
-        
-        for contador in range(2, numero):
-            if numero % contador == 0:
-                es_primo = False
+        for counter in range(2, number):
+            if number % counter == 0:
+                prime = False
                 break
 
-        if numero > 1 and es_primo:
-            lista_primos.append(numero)
+        if number > 1 and prime:
+            prime_list.append(number)
 
-    return lista_primos
+    return prime_list
 
 
 if __name__ == "__main__":
-    print(primos())
+    quantity = int(input("Cuántos números desea evaluar: "))
+    numbers = []
+
+    for i in range(quantity):
+        value = int(input("Ingrese el numero " + str(i + 1) + " de su lista: "))
+        numbers.append(value)
+
+    print("los números primos de su lista: " + str(numbers) + " son: " + str(prime_numbers(numbers)))
 
 
 # Para este problema se creó una función en donde el usuario puede poner la cantidad de números que desee en la lista.
@@ -120,24 +120,26 @@ if __name__ == "__main__":
 
 ``` python
 
-def suma():
-    cantidad = int(input("Cuántos números desea evaluar: "))
-    lista = []
-    lista_sumas = []
+def addition(numbers: list[int]) -> int:
+    sum_list = []
 
-    for i in range(cantidad):
-        x = int(input("Ingrese el numero " + str(i+1) + " de su lista: "))
-        lista.append(x)
+    for index in range(len(numbers) - 1):
+        addition = numbers[index] + numbers[index + 1]
+        sum_list.append(addition)
 
-    for i in range(len(lista)-1):
-        adicion = lista[i] + lista[i+1]
-        lista_sumas.append(adicion)
-
-    print("La mayor suma de dos números de la lista " + str(lista) + " es: " + str(max(lista_sumas)))
+    return max(sum_list)
 
 
 if __name__ == "__main__":
-    suma()
+    quantity = int(input("Cuántos números desea evaluar: "))
+    numbers = []
+
+    for i in range(quantity):
+        value = int(input("Ingrese el numero " + str(i + 1) + " de su lista: "))
+        numbers.append(value)
+
+    print("La mayor suma de dos números de la lista " + str(numbers) + " es: " + str(addition(numbers)))
+
 
 # Se hizo un programa con una función donde el usuario ingreso la cantidad de números a ser evaluados en una lista.
 # Para luego, mediante un ciclo for, sumar el primer elemento de la lista con el siguiente elemento, guardando el resultado 
@@ -149,31 +151,31 @@ if __name__ == "__main__":
 
 ``` python
 
-def mismos_caracteres():
-    palabras = int(input("Ingrese la cantidad de palabras que va a ingresar: "))
-    lista = []
-    guardar = []
+def same_characters(words: list[str]) -> list[str]:
+    result = []
 
-    for i in range(palabras):
-        palabra = input("Ingrese su palabra numero " + str(i+1) + ": ")
-        lista.append(palabra)
+    for first_variable in range(len(words)):
+        for second_variable in range(first_variable + 1, len(words)):
+            if sorted(words[first_variable]) == sorted(words[second_variable]):
 
-    resultado = []
+                if words[first_variable] not in result:
+                    result.append(words[first_variable])
 
-    for i in range(len(lista)):
-        for j in range(i + 1, len(lista)):
-            if sorted(lista[i]) == sorted(lista[j]):
+                if words[second_variable] not in result:
+                    result.append(words[second_variable])
 
-                if lista[i] not in resultado:
-                    resultado.append(lista[i])
+    return result
 
-                if lista[j] not in resultado:
-                    resultado.append(lista[j])
-
-    return resultado
 
 if __name__ == "__main__":
-    print(mismos_caracteres())
+    quantity = int(input("Ingrese la cantidad de palabras que va a ingresar: "))
+    words = []
+
+    for index in range(quantity):
+        word = input("Ingrese su palabra numero " + str(index + 1) + ": ")
+        words.append(word)
+
+    print("los elementos de su lista: " + str(words) + " que tienen las mismas letras son: "+ str(same_characters(words)))
 
 
 # Para este problema se creó una función en la cual el usuario ingresa la cantidad de palabras a evaluar.
